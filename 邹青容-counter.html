@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算器 </title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .counter{
+            width: 200px;
+            padding:20px;
+            margin: 0 auto;
+            background-color: #feffd3;
+            border: 1px solid #000;
+        }
+        input{
+            height: 30px;
+            width: 200px;
+            margin-bottom: 20px;
+            outline: none;
+            border: 1px solid #000;
+        }
+        select{
+            width: 200px;
+            height: 30px;
+            margin-bottom: 20px;
+            font-size:20px;
+            padding-left: 50px;
+            outline: none;
+            border: 1px solid #000;
+        }
+        input[type=button]{
+            background-color: #70fffa;
+            color: #4226ff;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload=function () {
+            var num1=document.getElementsByName("num1")[0];
+            var num2=document.getElementsByName("num2")[0];
+            var btn=document.getElementsByName("btn")[0];
+            var obj=document.getElementsByTagName("select")[0];
+            var sum = document.getElementsByTagName("span")[0];
+            btn.onclick=function () {
+                var selectedOpt=obj.options[obj.selectedIndex];
+                var n1=Number(num1.value);
+                var n2=Number(num2.value);
+                if(num1.value.length === 0 || num2.value.length === 0){
+                    alert('输入不能为空')
+                }else{
+                    if(Number.isNaN(n1) || Number.isNaN(n2)) {
+                        alert("请输入数字")
+                    }else{
+                        if (selectedOpt.text === '+'){
+                            sum.innerText=n1+n2;
+                        }else if(selectedOpt.text === '-'){
+                            sum.innerText=n1-n2;
+                        }else if(selectedOpt.text === '*'){
+                            sum.innerText=n1*n2;
+                        }else if(selectedOpt.text === '/'){
+                            if(n2 === 0){
+                                alert('除数不能为0')
+                            }else{
+                                sum.innerText=n1/n2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="counter">
+        <input type="text" name="num1" placeholder="请输入第一个数字"/>
+        <br/>
+        <select>
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select>
+        <br/>
+        <input type="text" name="num2" placeholder="请输入第二个数字"/>
+        <br/>
+        <input type="button" name="btn" value="计算"/>
+        <br/>
+        <p>计算结果为：<span></span></p>
+    </div>
+</body>
+</html>

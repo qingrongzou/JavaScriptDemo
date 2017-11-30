@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+    <style type="text/css">
+        .search{
+            width: 400px;
+            margin: 0 auto;
+            padding:10px;
+            background: #e4faff;
+        }
+        input{
+            width:160px;
+            height: 30px;
+            outline: none;
+            border: 1px solid #cccccc;
+        }
+        input[type="button"]{
+            width: 80px;
+            height:30px;
+            background: #f3ff5f;
+        }
+    </style>
+</head>
+
+<body>
+<div class="search">
+    <input type="text" placeholder="请输入字符串" id="text1"/>
+    <input type="button" value="点击" id="btn1">
+    <p>出现次数最多的字母为：<span id="span1"></span></p>
+    <p>出现的总次数：<span id="span2"></span></p>
+    <p>下标：<span id="span3"></span></p>
+</div>
+
+<script>
+    var oText=document.getElementById("text1");
+    var oBtn=document.getElementById("btn1");
+    var oSpan1=document.getElementById("span1");
+    var oSpan2=document.getElementById("span2");
+    var oSpan3=document.getElementById("span3");
+    oBtn.onclick=function () {
+        var str=oText.value;//获得字符串
+        var arr=str.split('');//将字符串拆分为数组
+        var obj={};//创建一个放置字符与次数的对象
+        for(var i=0; i<arr.length;i++){
+            var one=arr[i];
+            if(obj[one]){
+                obj[one]++;
+            }else{
+                obj[one]=1;
+            }
+        }
+        console.log(obj);
+        //取最大次数
+        var max=0;//存放最大次数
+        var maxChar=null;//次数出现最多的字母
+        for(var key in obj){
+            if(obj[key]>max){
+                max=obj[key];
+                maxChar=key;
+            }
+        }
+        var aKey=[];//出现次数最多的字母集合
+        for(var key in obj){
+            if(obj[key]===max){
+                aKey.push(key);
+            }
+        }
+        var s='';//存放字母的字符串
+        var s2='';//存放下标的字符串
+        for(var j=0;j<aKey.length;j++){
+            s=s+aKey[j]+' ';
+            for(var k=0;k<arr.length;k++){
+                if(aKey[j]===arr[k]){
+                    s2+="<br/>"+aKey[j]+'的下标'+k;
+                }
+            }
+        }
+        oSpan1.innerHTML=s;
+        oSpan2.innerHTML=max;
+        oSpan3.innerHTML=s2;
+    }
+</script>
+</body>
+</html>
